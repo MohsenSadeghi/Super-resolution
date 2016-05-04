@@ -13,7 +13,7 @@ def evaluate():
 	
 	global dat
 	
-	raw_dat = scipy.io.loadmat('149septinpixels.mat')
+	raw_dat = scipy.io.loadmat('../149septinpixels.mat')
 
 	dat = raw_dat["allseptins"]
 
