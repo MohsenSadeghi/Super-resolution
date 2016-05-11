@@ -26,12 +26,12 @@ def main ():
 	
 	#plt.show ()
 	
-	n_steps = 10000000
+	n_steps = 1000000
 	beta = 1.0e4
+	n_paths = 4
 	
 	path = np.arange (0, n_frames)
-	path_test = np.arange (0, n_frames)
-
+	
 	current_dist = path_length (path, d)
 	
 	dist_history = np.zeros ([n_steps, 1])
@@ -89,8 +89,8 @@ def main ():
 
 	frames_sorted = frames_padded[path[:]]
 	
-	np.save ('../149septin_sorted', frames_sorted)
-
+	#np.save ('../149septin_sorted', frames_sorted)
+	'''
 	for i in range(n_frames):
 		
 		plt.clf ()
@@ -100,7 +100,8 @@ def main ():
 		plt.pause (0.1)
 		
 		plt.draw ()
-
+	'''
+	
 	fig1 = plt.figure ()
 	ax = fig1.gca ()
 	

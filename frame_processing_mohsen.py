@@ -2,7 +2,6 @@ import numpy as np
 import scipy.io
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-from PIL import Image
 	
 def dist (f1, f2):
 	
