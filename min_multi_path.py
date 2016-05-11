@@ -43,7 +43,7 @@ def main ():
 	
 	#plt.show ()
 	
-	n_steps = int(1e6)
+	n_steps = int(2e6)
 	beta = 5.0e3
 	n_paths = 10
 	
@@ -64,7 +64,7 @@ def main ():
 	
 	for step in range (n_steps):
 		
-		beta += 0.01
+		beta += 0.1
 
 		step_type = RandInt (2)
 		
@@ -152,29 +152,7 @@ def main ():
 
 		dist_history[step] = current_dist
 			
-	frames_sorted = []
-
-	for i in range (n_paths):
-		print path[i]
-		frames_sorted.append(frames_padded[path[i][:]])
-
-	#np.save ('../149septin_sorted', frames_sorted)
-	
-	for i in range(n_paths):
-
-		n_frames_in_path = path[i].shape[0]
-		
-		for j in range(n_frames_in_path):
-			
-			plt.clf ()
-			
-			plt.imshow (frames_sorted[i][j])
-				
-			plt.pause (0.01)
-			
-			plt.draw ()
-		
-		plt.pause (1.0)
+	np.save ('../149septin_path', path)
 	
 	fig1 = plt.figure ()
 	ax = fig1.gca ()

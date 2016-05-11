@@ -89,7 +89,8 @@ def main ():
 
 	frames_sorted = frames_padded[path[:]]
 	
-	#np.save ('../149septin_sorted', frames_sorted)
+	np.save ('../149septin_sorted', frames_sorted)
+	
 	'''
 	for i in range(n_frames):
 		

@@ -4,19 +4,32 @@ import matplotlib.image as mpimg
 	
 def main ():
 			
-	frames_sorted = np.load('../149septin_sorted.npy')
+	frames_padded = np.load('../149septin_rotated.npy')
+	path = np.load('../149septin_path.npy')
 
-	n_frames, lx, ly = frames_sorted.shape
+	frames_sorted = []
+	
+	n_paths = path.shape[0]
+	
+	for i in range (n_paths):
+		print path[i]
+		frames_sorted.append(frames_padded[path[i][:]])
 
-	for i in range(n_frames):
+	for i in range(n_paths):
+
+		n_frames_in_path = path[i].shape[0]
 		
-		plt.clf ()
-		
-		plt.imshow (frames_sorted[i], cmap = plt.get_cmap('hot'))
+		for j in range(n_frames_in_path):
 			
-		plt.pause (0.1)
+			plt.clf ()
+			
+			plt.imshow (frames_sorted[i][j], cmap = plt.get_cmap('hot'))
+				
+			plt.pause (0.01)
+			
+			plt.draw ()
 		
-		plt.draw ()
+		plt.pause (1.0)
 					
 	return ()
 
