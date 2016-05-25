@@ -1,5 +1,6 @@
 Some notes:
 
 1. 3D data and depth information? Rotations in 3D, and different apparent sizes
+    -> not needed, yeast is big enough that it can be aligned such that the cells do not grow out of the x-y plane
 2. The experimnental detail? a manuscript?
 3. The point clustering idea

@@ -1,11 +1,4 @@
-import matplotlib.pyplot as plt
 import numpy as np
-import scipy.io
-
-
-def dist(f1, f2):
-    return np.sum(np.power((f1 - f2).reshape((-1, 1)), 2))
-
 
 # Finds the center of mass of a frame (to center it)
 def frame_COM(f):
@@ -97,86 +90,5 @@ def insert_rot_frame(f, f_pad, th):
 
             if (xr > 0) and (xr < lx - 1) and (yr > 0) and (yr < ly - 1):
                 f_pad[i, j] = fac * interpolate_point(f, xr, yr)
-            # else:
-            #	f_pad[i, j] = 10
-
-
-def main():
-    raw_dat = scipy.io.loadmat('../149septinpixels.mat')
-
-    dat = raw_dat["allseptins"]
-
-    n_frames = dat.size
-
-    np.set_printoptions(threshold=np.nan)
-
-    lxmax = -1
-    lymax = -1
-
-    for i in range(n_frames):
-        frame_dat = dat[0][i]
-
-        lx, ly = frame_dat.shape
-
-        lxmax = max(lx, lxmax)
-        lymax = max(ly, lymax)
-
-    lmax = max(lxmax, lymax) * 1.5
-
-    frames_padded = []
-
-    # n_frames = 50
-
-    d = np.zeros([n_frames, n_frames]);
-
-    for i in range(n_frames):
-        frame_dat = dat[0][i]
-
-        lx, ly = frame_dat.shape
-
-        cx, cy = frame_COM(frame_dat)
-
-        offset_x = int(np.rint(0.5 * lx - cx))
-        offset_y = int(np.rint(0.5 * ly - cy))
-
-        frame_dat = np.roll(frame_dat, offset_x, axis=0)
-        frame_dat = np.roll(frame_dat, offset_y, axis=1)
-
-        th = frame_orient(frame_dat)
-
-        # print float(i) / n_frames * 100.0
-
-        frame_dat_padded = np.zeros([lmax, lmax], dtype=np.float32)
-
-        insert_rot_frame(frame_dat, frame_dat_padded, th)
-
-        frames_padded.append(frame_dat_padded)
-
-        plt.clf()
-
-        plt.imshow(frames_padded[i])
-
-        plt.pause(0.1)
-
-        plt.draw()
-
-    np.save('../149septin_rotated', frames_padded)
-
-    for i in range(n_frames):
-
-        # d[i, i] = 1e6
-
-        for j in range(i + 1, n_frames):
-            d[i, j] = dist(frames_padded[i], frames_padded[j])
-            d[j, i] = d[i, j]
-
-    plt.matshow(d)
-
-    plt.draw()
-
-    plt.show()
-
-    return ()
-
-
-main()
+                # else:
+                #	f_pad[i, j] = 10
